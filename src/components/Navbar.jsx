@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
 import logo from "../assets/logo.png";
+import logo1 from "../assets/logo1.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -61,7 +62,12 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="container navbar-container">
         <div className="navbar-logo">
-          <img src={logo} alt="Logo" height={150} width={150} />
+          <img
+            src={isDarkMode ? logo1 : logo}
+            alt="Logo"
+            height={150}
+            width={150}
+          />
         </div>
 
         {/* Desktop Navigation */}

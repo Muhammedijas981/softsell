@@ -76,7 +76,6 @@ const ChatWidget = () => {
 
   return (
     <>
-      {/* Chat Toggle Button */}
       <motion.button
         className="chat-toggle-btn"
         onClick={() => setIsOpen(!isOpen)}
@@ -85,8 +84,6 @@ const ChatWidget = () => {
       >
         {isOpen ? <FaTimes /> : <FaComments />}
       </motion.button>
-
-      {/* Chat Window */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -96,7 +93,6 @@ const ChatWidget = () => {
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
           >
-            {/* Chat Header */}
             <div className="chat-header">
               <div className="chat-header-content">
                 <FaRobot className="chat-bot-icon" />
@@ -115,8 +111,6 @@ const ChatWidget = () => {
                 <FaTimes />
               </button>
             </div>
-
-            {/* Chat Messages */}
             <div className="chat-messages">
               {messages.length === 0 ? (
                 <div className="welcome-message">
@@ -195,8 +189,6 @@ const ChatWidget = () => {
               )}
               <div ref={messagesEndRef} />
             </div>
-
-            {/* Chat Input */}
             <div className="chat-input-container">
               <textarea
                 value={inputMessage}
