@@ -49,7 +49,7 @@ A single-page, responsive marketing website for a fictional software resale star
 
 - **Favicon** and logo placeholder
 - **SEO** meta tags and title
-- **Light/Dark mode** toggle (Tailwind-based)
+- **Light/Dark mode** toggle 
 - **Framer Motion** animations for smooth transitions
 - **Fully responsive** layout for mobile, tablet, and desktop
 
