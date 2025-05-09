@@ -1,7 +1,7 @@
 
 # SoftSell – Responsive Marketing Website
 
-A single-page, responsive marketing website for a fictional software resale startup called **SoftSell**. Built as part of the Credex Web Development Internship assignment using React, Vite, and Tailwind CSS.
+A single-page, responsive marketing website for a fictional software resale startup called **SoftSell**. Built as part of the Credex Web Development Internship assignment using React, Vite, and CSS.
 
 ## 🔗 Live Demo
 
@@ -10,7 +10,7 @@ A single-page, responsive marketing website for a fictional software resale star
 ## 📦 Tech Stack
 
 - **Framework**: React + Vite
-- **Styling**: Tailwind CSS
+- **Styling**: CSS
 - **Animations**: Framer Motion
 - **Deployment**: Vercel
 
