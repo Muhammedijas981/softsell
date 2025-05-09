@@ -6,10 +6,11 @@ import WhyChooseUs from "./components/WhyChooseUs";
 import Testimonials from "./components/Testimonials";
 import ContactForm from "./components/ContactForm";
 import Footer from "./components/Footer";
+import ChatWidget from "./components/ChatWidget";
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="app">
       <Navbar />
       <main>
         <Hero />
@@ -19,6 +20,7 @@ function App() {
         <ContactForm />
       </main>
       <Footer />
+      <ChatWidget />
     </div>
   );
 }

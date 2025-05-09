@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import {
   FaShieldAlt,
   FaMoneyBillWave,
@@ -34,19 +35,65 @@ const WhyChooseUs = () => {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+
   return (
-    <section id="why-choose-us" className="bg-white section">
+    <section id="why-choose-us" className="section bg-primary">
       <div className="container">
-        <h2 className="section-title">Why Choose SoftSell</h2>
-        <div className="grid md-grid-cols-2 gap-8">
+        <motion.h2
+          className="section-title"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          Why Choose SoftSell
+        </motion.h2>
+        <motion.div
+          className="grid md-grid-cols-2 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           {reasons.map((reason, index) => (
-            <div key={index} className="feature-card">
-              {reason.icon}
+            <motion.div
+              key={index}
+              className="feature-card"
+              variants={itemVariants}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <motion.div
+                whileHover={{ scale: 1.2, rotate: 5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                {reason.icon}
+              </motion.div>
               <h3 className="feature-title">{reason.title}</h3>
-              <p className="text-gray">{reason.description}</p>
-            </div>
+              <p className="feature-description">{reason.description}</p>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

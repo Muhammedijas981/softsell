@@ -1,81 +1,86 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
     <section className="hero">
       <div className="container hero-container">
-        <div className="hero-content">
-          <h1 className="hero-title">Turn Unused Software into Cash</h1>
-          <p className="hero-subtitle">
+        <motion.div
+          className="hero-content"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <motion.h1
+            className="hero-title"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+          >
+            Turn Unused Software into Cash
+          </motion.h1>
+          <motion.p
+            className="hero-subtitle"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+          >
             SoftSell helps businesses recoup costs by reselling unused software
             licenses at competitive prices. Fast, secure, and simple.
-          </p>
-          <div className="hero-cta">
-            <a href="#contact" className="btn btn-secondary">
+          </motion.p>
+          <motion.div
+            className="hero-cta"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
+          >
+            <motion.a
+              href="#contact"
+              className="btn btn-secondary"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               Sell My Licenses
-            </a>
-            <a href="#how-it-works" className="btn btn-light">
+            </motion.a>
+            <motion.a
+              href="#how-it-works"
+              className="btn btn-light"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               Learn More
-            </a>
-          </div>
-        </div>
-        <div className="hero-image">
-          <div className="flex flex-col gap-4">
-            <div className="bg-gray p-4 rounded">
-              <div className="flex mb-2">
-                <div
-                  className="mr-2"
-                  style={{
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "50%",
-                    backgroundColor: "rgba(16, 185, 129, 0.1)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "#10B981",
-                  }}
-                >
-                  ✓
-                </div>
-                <span style={{ fontWeight: 600, color: "#374151" }}>
-                  Adobe Creative Cloud
-                </span>
-              </div>
-              <div style={{ color: "#10B981", fontWeight: 600 }}>
-                Estimated value: $350
-              </div>
+            </motion.a>
+          </motion.div>
+        </motion.div>
+        <motion.div
+          className="hero-image"
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <motion.div
+            className="license-card"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <div className="flex mb-2">
+              <div className="license-icon">✓</div>
+              <span className="license-name">Adobe Creative Cloud</span>
             </div>
-            <div className="bg-gray p-4 rounded">
-              <div className="flex mb-2">
-                <div
-                  className="mr-2"
-                  style={{
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "50%",
-                    backgroundColor: "rgba(16, 185, 129, 0.1)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "#10B981",
-                  }}
-                >
-                  ✓
-                </div>
-                <span style={{ fontWeight: 600, color: "#374151" }}>
-                  Microsoft Office 365
-                </span>
-              </div>
-              <div style={{ color: "#10B981", fontWeight: 600 }}>
-                Estimated value: $220
-              </div>
+            <div className="license-value">Estimated value: $350</div>
+          </motion.div>
+          <motion.div
+            className="license-card"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <div className="flex mb-2">
+              <div className="license-icon">✓</div>
+              <span className="license-name">Microsoft Office 365</span>
             </div>
-            <a href="#contact" className="btn btn-primary text-center">
-              Get Your Quote Today
-            </a>
-          </div>
-        </div>
+            <div className="license-value">Estimated value: $220</div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

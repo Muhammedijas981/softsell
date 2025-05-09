@@ -5,29 +5,35 @@ const Testimonials = () => {
   const testimonials = [
     {
       name: "Sarah Johnson",
-      role: "IT Director",
-      company: "TechVision Inc.",
-      image: "https://randomuser.me/api/portraits/women/44.jpg",
+      role: "IT Manager",
+      company: "TechCorp Inc.",
+      image: "https://randomuser.me/api/portraits/women/1.jpg",
       content:
-        "SoftSell helped us recover over $15,000 from unused licenses after our company downsized. The process was incredibly straightforward, and the team was professional throughout.",
+        "SoftSell made selling our unused licenses incredibly easy. The process was smooth and we received payment within 24 hours!",
     },
     {
       name: "Michael Chen",
-      role: "CFO",
-      company: "Nexus Innovations",
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
+      role: "Director",
+      company: "Global Solutions",
+      image: "https://randomuser.me/api/portraits/men/1.jpg",
       content:
-        "As we transitioned to new software solutions, we had a surplus of premium licenses. SoftSell provided competitive valuations and quick payment, helping us optimize our IT budget efficiently.",
+        "The best platform for software license resale. Their valuation was fair and the customer service was exceptional.",
     },
   ];
 
   return (
-    <section id="testimonials" className="bg-light section">
+    <section id="testimonials" className="section bg-secondary">
       <div className="container">
-        <h2 className="section-title">What Our Customers Say</h2>
+        <h2 className="section-title animate-fade-in">
+          What Our Customers Say
+        </h2>
         <div className="grid md-grid-cols-2 gap-8">
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="testimonial-card">
+            <div
+              key={index}
+              className="testimonial-card animate-slide-up"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
               <FaQuoteLeft className="testimonial-quote" />
               <div className="testimonial-header">
                 <img
@@ -47,7 +53,7 @@ const Testimonials = () => {
                   <FaStar key={i} />
                 ))}
               </div>
-              <p className="text-dark">{testimonial.content}</p>
+              <p className="testimonial-content">{testimonial.content}</p>
             </div>
           ))}
         </div>

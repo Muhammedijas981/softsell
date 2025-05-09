@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaPaperPlane } from "react-icons/fa";
+import { FaPaperPlane, FaCheckCircle } from "react-icons/fa";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -10,8 +10,9 @@ const ContactForm = () => {
     message: "",
   });
 
-  const [errors, setErrors] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [error, setError] = useState("");
 
   const licenseTypes = [
     "Microsoft Office",
@@ -25,100 +26,54 @@ const ContactForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
-    });
-
-    // Clear error for this field when user starts typing
-    if (errors[name]) {
-      setErrors({
-        ...errors,
-        [name]: "",
-      });
-    }
+    }));
   };
 
-  const validate = () => {
-    const newErrors = {};
-
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)
-    ) {
-      newErrors.email = "Invalid email address";
-    }
-
-    if (!formData.company.trim()) {
-      newErrors.company = "Company is required";
-    }
-
-    if (!formData.licenseType) {
-      newErrors.licenseType = "Please select a license type";
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = "Message is required";
-    }
-
-    return newErrors;
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setError("");
 
-    const newErrors = validate();
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
+    try {
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      setSubmitSuccess(true);
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        licenseType: "",
+        message: "",
+      });
+    } catch (err) {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
-
-    // In a real app, you would send this data to a server
-    console.log("Form submitted:", formData);
-    setIsSubmitted(true);
-
-    // Reset form after submission
-    setFormData({
-      name: "",
-      email: "",
-      company: "",
-      licenseType: "",
-      message: "",
-    });
   };
 
   return (
-    <section id="contact" className="bg-white">
-      <div className="section">
-        <h2 className="section-title">Get Your Software Valuation</h2>
-
-        <div className="form-container">
-          {isSubmitted ? (
-            <div className="form-success">
+    <section id="contact" className="section bg-primary">
+      <div className="container">
+        <h2 className="section-title animate-fade-in">Get Started</h2>
+        <div className="form-container animate-slide-up">
+          {submitSuccess ? (
+            <div className="form-success animate-fade-in">
               <div className="form-success-icon">
-                <FaPaperPlane size={24} />
+                <FaCheckCircle />
               </div>
-              <h3 className="text-dark mb-2">Thank You!</h3>
-              <p className="text-gray mb-4">
-                We've received your information and will get back to you with a
-                valuation shortly.
+              <h3 className="form-success-title">Thank You!</h3>
+              <p className="form-success-message">
+                We've received your inquiry and will get back to you within 24
+                hours.
               </p>
-              <button
-                onClick={() => setIsSubmitted(false)}
-                className="btn btn-primary"
-              >
-                Submit Another Request
-              </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
+            <form onSubmit={handleSubmit} className="contact-form">
+              <div className="form-group animate-slide-up delay-100">
                 <label htmlFor="name" className="form-label">
                   Full Name
                 </label>
@@ -128,15 +83,13 @@ const ContactForm = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className={`form-input ${
-                    errors.name ? "border-red-500" : ""
-                  }`}
-                  placeholder="John Doe"
+                  className="form-input"
+                  required
+                  placeholder="Enter your full name"
                 />
-                {errors.name && <p className="form-error">{errors.name}</p>}
               </div>
 
-              <div className="form-group">
+              <div className="form-group animate-slide-up delay-200">
                 <label htmlFor="email" className="form-label">
                   Email Address
                 </label>
@@ -146,15 +99,13 @@ const ContactForm = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`form-input ${
-                    errors.email ? "border-red-500" : ""
-                  }`}
-                  placeholder="john@example.com"
+                  className="form-input"
+                  required
+                  placeholder="Enter your email address"
                 />
-                {errors.email && <p className="form-error">{errors.email}</p>}
               </div>
 
-              <div className="form-group">
+              <div className="form-group animate-slide-up delay-300">
                 <label htmlFor="company" className="form-label">
                   Company Name
                 </label>
@@ -164,17 +115,13 @@ const ContactForm = () => {
                   name="company"
                   value={formData.company}
                   onChange={handleChange}
-                  className={`form-input ${
-                    errors.company ? "border-red-500" : ""
-                  }`}
-                  placeholder="Acme Inc."
+                  className="form-input"
+                  required
+                  placeholder="Enter your company name"
                 />
-                {errors.company && (
-                  <p className="form-error">{errors.company}</p>
-                )}
               </div>
 
-              <div className="form-group">
+              <div className="form-group animate-slide-up delay-400">
                 <label htmlFor="licenseType" className="form-label">
                   License Type
                 </label>
@@ -183,47 +130,53 @@ const ContactForm = () => {
                   name="licenseType"
                   value={formData.licenseType}
                   onChange={handleChange}
-                  className={`form-select ${
-                    errors.licenseType ? "border-red-500" : ""
-                  }`}
+                  className="form-select"
+                  required
                 >
-                  <option value="">Select License Type</option>
-                  {licenseTypes.map((type, index) => (
-                    <option key={index} value={type}>
-                      {type}
-                    </option>
-                  ))}
+                  <option value="">Select a license type</option>
+                  <option value="adobe">Adobe Creative Cloud</option>
+                  <option value="microsoft">Microsoft Office 365</option>
+                  <option value="autodesk">Autodesk</option>
+                  <option value="other">Other</option>
                 </select>
-                {errors.licenseType && (
-                  <p className="form-error">{errors.licenseType}</p>
-                )}
               </div>
 
-              <div className="form-group">
+              <div className="form-group animate-slide-up delay-500">
                 <label htmlFor="message" className="form-label">
-                  Message
+                  Additional Information
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
+                  className="form-textarea"
                   rows="4"
-                  className={`form-textarea ${
-                    errors.message ? "border-red-500" : ""
-                  }`}
-                  placeholder="Tell us about your software licenses (quantity, purchase date, etc.)"
+                  placeholder="Tell us more about your software licenses..."
                 ></textarea>
-                {errors.message && (
-                  <p className="form-error">{errors.message}</p>
-                )}
               </div>
 
-              <div className="mt-4">
-                <button type="submit" className="btn btn-primary btn-full">
-                  Get Valuation
-                </button>
-              </div>
+              {error && (
+                <div className="form-error animate-fade-in">{error}</div>
+              )}
+
+              <button
+                type="submit"
+                className="btn btn-primary btn-full animate-slide-up delay-600"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <>
+                    <span className="loading-spinner"></span>
+                    Submitting...
+                  </>
+                ) : (
+                  <>
+                    <FaPaperPlane />
+                    Submit Inquiry
+                  </>
+                )}
+              </button>
             </form>
           )}
         </div>
